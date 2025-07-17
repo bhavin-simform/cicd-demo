@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-version:
+      python: 3.8
+    commands:
+    - pip install awscli jq
+
+  pre_build:
+    commands:
+    - echo Logging in to Docker Hub using Secrets Manager...
+    - export DOCKER_CREDS=$(aws secretsmanager get-secret-value --secret-id dockerhub/credentials --query SecretString --output text)
+    - export DOCKER_USERNAME=$(echo $DOCKER_CREDS | jq -r .username)
+    - export DOCKER_PASSWORD=$(echo $DOCKER_CREDS | jq -r .password)
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+  build:
+    commands:
+    - echo Building Docker Image...
+    - docker build -t bhavin20/ci-cd .
+    - docker push bhavin20/ci-cd
