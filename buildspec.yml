@@ -20,3 +20,7 @@ phases:
     - echo Building Docker Image...
     - docker build -t bhavin20/ci-cd .
     - docker push bhavin20/ci-cd
+
+artifacts:
+  files:
+  - '**/*'
