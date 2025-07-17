@@ -20,7 +20,10 @@ phases:
     - echo Building Docker Image...
     - docker build -t bhavin20/ci-cd .
     - docker push bhavin20/ci-cd
+    - echo Creating imagedefinitions.json file...
+    - printf '[{"name":"fargate_task","imageUri":"bhavin20/ci-cd"}]' > imagedefinitions.json
 
 artifacts:
   files:
   - '**/*'
+  - imagedefinitions.json
