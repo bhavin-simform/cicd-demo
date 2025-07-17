@@ -65,7 +65,7 @@ async function initializeDatabase() {
 
 // Health check endpoint
 app.get('/', (req, res) => {
-    res.status(200).send('OK');
+    res.status(200).send('OK Pipeline is Working...');
 });
 
 // Start server
