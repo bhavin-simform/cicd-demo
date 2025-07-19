@@ -65,8 +65,55 @@ async function initializeDatabase() {
 
 // Health check endpoint
 app.get('/', (req, res) => {
-    res.status(200).send('OK Hello There....);
+    res.status(200).send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>🚀 Deployment Status</title>
+            <style>
+                body {
+                    font-family: 'Segoe UI', sans-serif;
+                    background-color: #f4f4f4;
+                    color: #333;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: 100vh;
+                    margin: 0;
+                }
+                .status {
+                    background-color: #ffffff;
+                    padding: 30px;
+                    border-radius: 10px;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                    text-align: center;
+                }
+                .status h1 {
+                    color: #28a745;
+                    font-size: 2.5em;
+                    margin-bottom: 10px;
+                }
+                .status p {
+                    font-size: 1.2em;
+                    color: #666;
+                }
+                .emoji {
+                    font-size: 3em;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="status">
+                <div class="emoji">✅</div>
+                <h1>Backend is Live</h1>
+                <p>Your ECS Deployment via Pipeline was <strong>successful</strong>!</p>
+            </div>
+        </body>
+        </html>
+    `);
 });
+
 
 // Start server
 const PORT = process.env.PORT || 3000;
